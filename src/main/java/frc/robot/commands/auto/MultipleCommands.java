@@ -23,9 +23,25 @@ public class MultipleCommands extends AutoCommand
          */
         super((new SimpleDrive(-0.5, 0.5).withTimeout(1)),
             new StopMotors().withTimeout(2),
+
             (new SimpleDrive(1,-1).withTimeout(1)),
             new StopMotors().withTimeout(2),
+
+            (new SimpleDrive(1,-1).withTimeout(1)),
+            new StopMotors().withTimeout(2),
+
+            (new SimpleDrive(1,-1).withTimeout(1)),
+            new StopMotors().withTimeout(2),
+
+            (new SimpleDrive(1,-1).withTimeout(1)),
+            new StopMotors().withTimeout(2),
+
+            (new SimpleDrive(1,-1).withTimeout(1)),
+            new StopMotors().withTimeout(2),
+
             (new SimpleDrive(1,1).withTimeout(1)),
             new StopMotors()); 
+
+            
     }
 }
