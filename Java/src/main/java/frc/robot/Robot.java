@@ -78,79 +78,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-  }
-
-  /**
-   * This function is called once each time the robot enters Disabled mode.
-   */
-  @Override
-  public void disabledInit() {
-    //Check to see if autoChooser has been created
-    if(null == RobotContainer.autoChooser)
-    {
-      RobotContainer.autoChooser = new SendableChooser<>();
-    }
-
-    //Add the default auto to the auto chooser
-    RobotContainer.autoChooser.setDefaultOption("Multiple Commands", "Multiple Commands");
-    RobotContainer.autoMode.put("Multiple Commands", new MultipleCommands());
-
-    //Add other autos to the chooser
-    addAutoToSelector(RobotContainer.autoChooser, "Multiple Commands", new MultipleCommands());
-
-    //Update Smartdashboard
-    SmartDashboard.putData(RobotContainer.autoChooser);
-  }
-
-  private void addAutoToSelector(SendableChooser<String> chooser, String auto, AutoCommand cmd)
-  {
-    chooser.addOption(auto, auto);
-    RobotContainer.autoMode.put(auto, cmd);
-  }
-
-  @Override
-  public void disabledPeriodic() {
-  }
-
-  /**
-   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
-   */
-  @Override
-  public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
-  }
-
-  /**
-   * This function is called periodically during autonomous.
-   */
-  @Override
-  public void autonomousPeriodic() {
-  }
-
-  @Override
-  public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
-  }
-
-  /**
-   * This function is called periodically during operator control.
-   */
-  @Override
-  public void teleopPeriodic() {
-    m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
-
-    Timer.delay(0.020);		/* wait for one motor update time period (50Hz)     */
+    
+            Timer.delay(0.020);		/* wait for one motor update time period (50Hz)     */
             
             boolean zero_yaw_pressed = stick.getTrigger();
             if ( zero_yaw_pressed ) {
@@ -237,6 +166,79 @@ public class Robot extends TimedRobot {
             /* Connectivity Debugging Support                                           */
             SmartDashboard.putNumber(   "IMU_Byte_Count",       ahrs.getByteCount());
             SmartDashboard.putNumber(   "IMU_Update_Count",     ahrs.getUpdateCount());
+  }
+
+  /**
+   * This function is called once each time the robot enters Disabled mode.
+   */
+  @Override
+  public void disabledInit() {
+    //Check to see if autoChooser has been created
+    if(null == RobotContainer.autoChooser)
+    {
+      RobotContainer.autoChooser = new SendableChooser<>();
+    }
+
+    //Add the default auto to the auto chooser
+    RobotContainer.autoChooser.setDefaultOption("Multiple Commands", "Multiple Commands");
+    RobotContainer.autoMode.put("Multiple Commands", new MultipleCommands());
+
+    //Add other autos to the chooser
+    addAutoToSelector(RobotContainer.autoChooser, "Multiple Commands", new MultipleCommands());
+
+    //Update Smartdashboard
+    SmartDashboard.putData(RobotContainer.autoChooser);
+  }
+
+  private void addAutoToSelector(SendableChooser<String> chooser, String auto, AutoCommand cmd)
+  {
+    chooser.addOption(auto, auto);
+    RobotContainer.autoMode.put(auto, cmd);
+  }
+
+  @Override
+  public void disabledPeriodic() {
+  }
+
+  /**
+   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
+   */
+  @Override
+  public void autonomousInit() {
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    // schedule the autonomous command (example)
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+  }
+
+  /**
+   * This function is called periodically during autonomous.
+   */
+  @Override
+  public void autonomousPeriodic() {
+  }
+
+  @Override
+  public void teleopInit() {
+    // This makes sure that the autonomous stops running when
+    // teleop starts running. If you want the autonomous to
+    // continue until interrupted by another command, remove
+    // this line or comment it out.
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
+  }
+
+  /**
+   * This function is called periodically during operator control.
+   */
+  @Override
+  public void teleopPeriodic() {
+    m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
+
+
   }
 
   @Override
